@@ -12,8 +12,8 @@ function sendEmail($to, $subject, $body){
         $mail->isSMTP();
         $mail->Host       = 'smtp.zoho.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'no-reply@trustfund.store';
-        $mail->Password   = '78741Pearl';
+        $mail->Username   = '-';
+        $mail->Password   = '-';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
