@@ -6,7 +6,7 @@ if(!isset($_SESSION['user_id'])){
     exit();
 }
 
-if($_SESSION['role'] != 'admin'){
+if(!in_array($_SESSION['role'], ['admin', 'super_admin', 'mini_admin'])){
     header("Location: ../index.php");
     exit();
 }
@@ -299,6 +299,15 @@ body{ background:#f4f4f4; font-family:Arial,sans-serif; }
             <a href="applications.php"><i class="fa-solid fa-file-circle-check"></i> Seller Applications</a>
             <a href="listings.php"><i class="fa-solid fa-box"></i> Listings</a>
             <a href="messages.php" class="active"><i class="fa-solid fa-comments"></i> Messages</a>
+			<a href="transactions.php">
+    <i class="fa-solid fa-chart-bar"></i>
+    Transactions
+</a>
+			<a href="visitors.php">
+			
+    <i class="fa-solid fa-chart-bar"></i>
+    Visitor Stats
+</a>
             <a href="users.php"><i class="fa-solid fa-users"></i> Users</a>
         </div>
     </div>

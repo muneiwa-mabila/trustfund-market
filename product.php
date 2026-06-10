@@ -458,7 +458,11 @@ body{ background:#fff; font-family:Arial,sans-serif; color:#111; }
         <div class="seller-top-left">
           <div>
             <div class="sold-by">Sold by:</div>
-            <div class="seller-name"><?= htmlspecialchars($product['seller_name']); ?></div>
+           <div class="seller-name">
+    <a href="seller-profile.php?id=<?= $product['seller_user_id']; ?>" style="color:inherit;text-decoration:none;">
+        <?= htmlspecialchars($product['seller_name']); ?>
+    </a>
+        </div>
           </div>
           <?php if($buyer_id && $buyer_id != $product['seller_user_id']): ?>
           <button class="report-btn" onclick="document.getElementById('reportModal').classList.add('open')">

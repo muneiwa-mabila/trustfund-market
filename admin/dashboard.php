@@ -316,6 +316,16 @@ body{
                 <i class="fa-solid fa-users"></i>
                 Users
             </a>
+			<a href="transactions.php">
+    <i class="fa-solid fa-receipt"></i>
+    Transactions
+             </a>
+
+			<a href="visitors.php">
+			
+    <i class="fa-solid fa-chart-bar"></i>
+    Visitor Stats
+</a>
 
             <a href="manage_admins.php">
                 <i class="fa-solid fa-user-shield"></i>

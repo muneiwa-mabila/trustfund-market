@@ -146,6 +146,16 @@ body { background:#f4f4f4; font-family:Arial,sans-serif; }
       <a href="dashboard.php"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
       <a href="applications.php" class="active"><i class="fa-solid fa-file-circle-check"></i> Seller Applications</a>
       <a href="listings.php"><i class="fa-solid fa-box"></i> Listings</a>
+	  	<a href="transactions.php">
+    <i class="fa-solid fa-receipt"></i>
+    Transactions
+             </a>
+
+			<a href="visitors.php">
+			
+    <i class="fa-solid fa-chart-bar"></i>
+    Visitor Stats
+</a>
       <a href="messages.php"><i class="fa-solid fa-envelope"></i> Messages</a>
       <a href="users.php"><i class="fa-solid fa-users"></i> Users</a>
     </div>

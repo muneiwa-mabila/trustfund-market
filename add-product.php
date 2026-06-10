@@ -23,11 +23,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $product_description = mysqli_real_escape_string($conn, $_POST['product_description']);
     $product_price       = mysqli_real_escape_string($conn, $_POST['product_price']);
     $product_category    = mysqli_real_escape_string($conn, $_POST['product_category']);
-    $product_status      = $_POST['product_status'];
+    $product_type        = mysqli_real_escape_string($conn, $_POST['product_type'] ?? 'Product');
+    $product_status      = mysqli_real_escape_string($conn, $_POST['product_status'] ?? 'Draft');
+
+    // Validate product_status to prevent arbitrary values
+    if (!in_array($product_status, ['Pending', 'Draft'])) {
+        $product_status = 'Draft';
+    }
 
     $image_name = '';
 
-    if (!empty($_FILES['product_image']['name'])) {
+    // Only process image if one was actually uploaded without errors
+    if (!empty($_FILES['product_image']['name']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
 
         $allowed_exts  = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
         $allowed_mimes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
@@ -48,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         product_price,
         product_image,
         product_category,
+        product_type,
         product_status
     ) VALUES (
         '$seller_id',
@@ -56,6 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         '$product_price',
         '$image_name',
         '$product_category',
+        '$product_type',
         '$product_status'
     )";
 
@@ -459,10 +468,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <div class="btn-row">
-          <button type="submit" name="product_status" value="Pending" class="publish-btn">
+          <button type="submit" name="product_status" value="Pending" class="publish-btn" onclick="disableButtons(this)">
             Submit For Approval
           </button>
-          <button type="submit" name="product_status" value="Draft" class="draft-btn">
+          <button type="submit" name="product_status" value="Draft" class="draft-btn" onclick="disableButtons(this)">
             Save as Draft
           </button>
         </div>
@@ -491,6 +500,18 @@ function previewImage(event){
     } else {
         preview.style.display = 'none';
     }
+}
+
+// Prevent double-submission by disabling buttons once clicked
+function disableButtons(clickedBtn) {
+    setTimeout(function() {
+        document.querySelectorAll('.btn-row button').forEach(function(btn) {
+            btn.disabled = true;
+            btn.style.opacity = '0.6';
+            btn.style.cursor = 'not-allowed';
+        });
+        clickedBtn.textContent = 'Submitting...';
+    }, 0);
 }
 </script>
 

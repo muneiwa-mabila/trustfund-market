@@ -11,7 +11,9 @@ $user_id = $_SESSION['user_id'];
 $query = mysqli_query($conn, "SELECT * FROM users WHERE user_id='$user_id'");
 if(mysqli_num_rows($query) == 0){ die("Admin account not found"); }
 $user = mysqli_fetch_assoc($query);
-if(trim(strtolower($user['role'])) != 'admin'){ die("You are not admin"); }
+if(!in_array(trim(strtolower($user['role'])), ['admin', 'super_admin', 'mini_admin'])){
+    die("You are not admin");
+}
 
 /* APPROVE PRODUCT */
 if(isset($_GET['approve'])){
